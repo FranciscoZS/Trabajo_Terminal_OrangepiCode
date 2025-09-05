@@ -1,0 +1,20 @@
+description: Ultralytics best model trained on TT-1\data.yaml
+author: Ultralytics
+date: '2025-05-22T20:59:51.463434'
+version: 8.3.141
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: chair
+  1: student
+  2: table
+args:
+  batch: 1
+  half: false
+channels: 3
