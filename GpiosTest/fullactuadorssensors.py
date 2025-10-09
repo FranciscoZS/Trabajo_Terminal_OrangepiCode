@@ -2,6 +2,15 @@ import pwmOrangpiBash
 import encoderOrangepi
 import time
 import subprocess
+import sdc40Orangepi
+import mpuOrangepi
+
+
+mpu = mpuOrangepi.MPU()
+sdc40 = sdc40Orangepi.SCD40_SMBus()
+#sdc40Orangepi.main()
+time.sleep(2)
+sdc40.start_periodic_measurement()
 
 encoder_0 = encoderOrangepi.OpticalEncoder(pin_a=4,pin_b=6,ppr=1000)
 encoder_1 = encoderOrangepi.OpticalEncoder(pin_a=9,pin_b=10,ppr=1000)
@@ -30,12 +39,16 @@ try:
         print(f"wheel1 = {wheel_1.duty_cycle}")
         print(f"wheel2 = {wheel_2.duty_cycle}")
         print(f"wheel3 = {wheel_3.duty_cycle}")
-        time.sleep(1)
+        mpu.readMPU()
+        sdc40.read_measurement()
+        time.sleep(5)
 except KeyboardInterrupt:
     subprocess.run("gpio readall",shell=True)
     wheel_0.cleanup()
     wheel_1.cleanup()
     wheel_2.cleanup()
     wheel_3.cleanup()
+    sdc40.stop_periodic_measurement()
+    sdc40.close()
     print("Terminado")
     subprocess.run("gpio readall",shell=True)
