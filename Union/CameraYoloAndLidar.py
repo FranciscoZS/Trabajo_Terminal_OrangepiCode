@@ -9,7 +9,7 @@ from TauLidarCamera.camera import Camera
 cap = cv2.VideoCapture(0)
 
 # Cargar modelo YOLO
-model = YOLO(r"/home/orangepi/TestTT/TestCameraAndYolo/best_ncnn_model")
+model = YOLO(r"/home/orangepi/Trabajo_Terminal_OrangepiCode/TestCameraAndYolo/best_ncnn_model")
 
 def setup(serialPort=None):
     port = None
